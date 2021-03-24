@@ -97,8 +97,10 @@ def populate_inventory(populate_name="", populate_price=0, populate_quantity=0, 
 
             print("\nA duplicate entry for {} has been detected. Saving most-recent update.".format(duplicate_product))
 
-            # update duplicate product in Product with newest Price, Quantity, and Date 
-            Product.update(product_price = populate_price, product_quantity = populate_quantity, date_updated = populate_date_updated).where(Product.product_name == populate_name)
+            # update duplicate product in Product with newest Price, Quantity, and Date; set as SQL query
+            # execute query to update entries
+            update = Product.update(product_price = populate_price, product_quantity = populate_quantity, date_updated = populate_date_updated).where(Product.product_name == populate_name)
+            update.execute()
 
             
 # function for reading inventory csv file, converting all items using convert_csv_items function, then populating inventory database
